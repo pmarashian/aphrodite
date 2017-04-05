@@ -82,6 +82,17 @@ export const defaultSelectorHandlers = [
         return generateSubtreeStyles(baseSelector + selector);
     },
 
+	function classSelectors(
+		selector /* : string */,
+		baseSelector /* : string */,
+		generateSubtreeStyles /* : Function */
+	) /* */ {
+		if (selector[0] !== ".") {
+			return null;
+		}
+		return generateSubtreeStyles(baseSelector + selector);
+	},
+
     // Handle media queries (or font-faces)
     function mediaQueries(
         selector /* : string */,

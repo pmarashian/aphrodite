@@ -171,6 +171,14 @@ module.exports =
 	        return null;
 	    }
 	    return generateSubtreeStyles(baseSelector + selector);
+	}, function classSelectors(selector, /* : string */
+	baseSelector, /* : string */
+	generateSubtreeStyles /* : Function */
+	) /* */{
+	    if (selector[0] !== ".") {
+	        return null;
+	    }
+	    return generateSubtreeStyles(baseSelector + selector);
 	},
 
 	// Handle media queries (or font-faces)
@@ -490,7 +498,7 @@ module.exports =
 	          style[property] = _processedValue;
 	        }
 
-	        style = (0, _prefixProperty2.default)(prefixMap, property, style);
+	        (0, _prefixProperty2.default)(prefixMap, property, style);
 	      }
 	    }
 
@@ -519,28 +527,12 @@ module.exports =
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function prefixProperty(prefixProperties, property, style) {
-	  if (!prefixProperties.hasOwnProperty(property)) {
-	    return style;
-	  }
-
-	  // We need to preserve the order of the styles while inserting new prefixed
-	  // styles. Object order is not guaranteed, but this is better than nothing.
-	  // Note that this is brittle and is likely to break in older versions of
-	  // Node (e.g. Node 4).
-	  var newStyle = {};
-	  Object.keys(style).forEach(function (styleProperty) {
-	    if (styleProperty === property) {
-	      // We've found the style we need to prefix.
-	      var requiredPrefixes = prefixProperties[property];
-	      for (var i = 0, len = requiredPrefixes.length; i < len; ++i) {
-	        newStyle[requiredPrefixes[i] + (0, _capitalizeString2.default)(property)] = style[property];
-	      }
+	  if (prefixProperties.hasOwnProperty(property)) {
+	    var requiredPrefixes = prefixProperties[property];
+	    for (var i = 0, len = requiredPrefixes.length; i < len; ++i) {
+	      style[requiredPrefixes[i] + (0, _capitalizeString2.default)(property)] = style[property];
 	    }
-
-	    newStyle[styleProperty] = style[styleProperty];
-	  });
-
-	  return newStyle;
+	  }
 	}
 	module.exports = exports['default'];
 

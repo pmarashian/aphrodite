@@ -2,6 +2,8 @@
 import React from 'react';
 import { StyleSheet, css } from '../../src/index.js';
 
+
+
 const StyleTester = React.createClass({
     getInitialState: function() {
         return {
@@ -75,6 +77,10 @@ const opacityKeyframes = {
 const styles = StyleSheet.create({
     red: {
         color: "red",
+
+		".bold" : {
+        	fontWeight: "bold"
+		}
     },
 
     blue: {
@@ -172,6 +178,10 @@ const styles = StyleSheet.create({
 const styles2 = StyleSheet.create({
     red: {
         color: "green",
+
+		".bold" : {
+        	fontWeight: "bold"
+		}
     },
 });
 
